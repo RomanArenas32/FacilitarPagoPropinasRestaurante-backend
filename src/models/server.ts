@@ -1,6 +1,7 @@
 import express, { Application } from 'express';
 import path = require('path');
 import { dbConnecion } from '../database/config';
+const cors = require('cors');
 
 export default class Server {
     public app: Application;
@@ -10,7 +11,7 @@ export default class Server {
         this.port = port;
         this.app = express();
         this.app.use(express.json());
-
+        this.app.use( cors());
         this.dbConnecion();
     }
 

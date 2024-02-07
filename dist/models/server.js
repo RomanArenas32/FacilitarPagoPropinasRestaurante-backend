@@ -15,11 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const path = require("path");
 const config_1 = require("../database/config");
+const cors = require('cors');
 class Server {
     constructor(port) {
         this.port = port;
         this.app = (0, express_1.default)();
         this.app.use(express_1.default.json());
+        this.app.use(cors());
         this.dbConnecion();
     }
     dbConnecion() {
