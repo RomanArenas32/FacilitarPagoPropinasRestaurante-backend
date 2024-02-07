@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.resetearPagos = exports.enviarPago = exports.listarPagos = void 0;
+exports.borrarPago = exports.resetearPagos = exports.enviarPago = exports.listarPagos = void 0;
 const pagos_1 = __importDefault(require("../models/pagos"));
 const listarPagos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     //listar los pagos que se van haciendo
@@ -64,3 +64,19 @@ const resetearPagos = (req, res) => __awaiter(void 0, void 0, void 0, function* 
     }
 });
 exports.resetearPagos = resetearPagos;
+const borrarPago = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { id } = req.params;
+    try {
+        const pago = yield pagos_1.default.findByIdAndDelete(id);
+        res.status(200).json({
+            msg: "Pago eliminado correctamente",
+            pago
+        });
+    }
+    catch (error) {
+        res.json({
+            msg: "No se pudo eliminar el pago. Contacte al administrador"
+        });
+    }
+});
+exports.borrarPago = borrarPago;

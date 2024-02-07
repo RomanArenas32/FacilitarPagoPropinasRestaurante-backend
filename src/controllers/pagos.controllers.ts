@@ -50,3 +50,17 @@ export const resetearPagos = async (req: Request, res: Response) => {
         });
     }
 };
+export const borrarPago = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    try {
+        const pago = await Pago.findByIdAndDelete(id);
+        res.status(200).json({
+            msg: "Pago eliminado correctamente",
+            pago
+        });
+    } catch (error) {
+        res.json({
+            msg: "No se pudo eliminar el pago. Contacte al administrador"
+        })
+    }
+}
